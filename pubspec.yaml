@@ -66,6 +66,10 @@ flutter:
     - assets/icon_plane.png     
     - assets/image_get_started.png
     - assets/image_card.png
+    - assets/icon_home.png
+    - assets/icon_booking.png
+    - assets/icon_card.png
+    - assets/icon_setting.png
     
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
