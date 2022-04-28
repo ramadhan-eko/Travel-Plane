@@ -27,6 +27,7 @@ class MainPage extends StatelessWidget {
             children: [
               CustomBottomNavigationItem(
                 imageUrl: 'assets/icon_home.png',
+                isSelected: true,
               ),
               CustomBottomNavigationItem(
                 imageUrl: 'assets/icon_book.png',
