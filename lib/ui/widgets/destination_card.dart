@@ -53,6 +53,29 @@ class DestinationCard extends StatelessWidget {
                     bottomLeft: Radius.circular(18),
                   ),
                 ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 24,
+                      height: 24,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(
+                            'assets/icon_star.png',
+                          ),
+                        ),
+                      ),
+                    ),
+                    Text(
+                      rating.toString(),
+                      style: blackTextStyle.copyWith(
+                        fontWeight: medium,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
