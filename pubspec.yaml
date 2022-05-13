@@ -92,6 +92,7 @@ flutter:
     - assets/icon_unavailable.png
     - assets/image_checkout.png
     - assets/icon_checked.png
+    - assets/image_success.png
     
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
