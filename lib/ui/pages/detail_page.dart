@@ -1,12 +1,16 @@
-import 'package:airplane/shared/theme.dart';
+import 'package:airplane/models/destination_model.dart';
 import 'package:airplane/ui/pages/choose_seat_page.dart';
 import 'package:airplane/ui/widgets/custom_button.dart';
 import 'package:airplane/ui/widgets/interest_item.dart';
 import 'package:airplane/ui/widgets/photo_item.dart';
 import 'package:flutter/material.dart';
+import 'package:airplane/shared/theme.dart';
+import 'package:intl/intl.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({Key? key}) : super(key: key);
+  final DestinationModel destination;
+
+  const DetailPage(this.destination, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +21,8 @@ class DetailPage extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: AssetImage(
-              'assets/image_destination1.png',
+            image: NetworkImage(
+              destination.imageUrl,
             ),
           ),
         ),
@@ -77,7 +81,7 @@ class DetailPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Lake Ciliwung',
+                          destination.name,
                           style: whiteTextStyle.copyWith(
                             fontSize: 24,
                             fontWeight: semiBold,
@@ -85,12 +89,12 @@ class DetailPage extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          'Tangerang',
+                          destination.city,
                           style: whiteTextStyle.copyWith(
                             fontSize: 16,
                             fontWeight: light,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -99,8 +103,9 @@ class DetailPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        width: 24,
-                        height: 24,
+                        width: 20,
+                        height: 20,
+                        margin: EdgeInsets.only(right: 2),
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage(
@@ -110,7 +115,7 @@ class DetailPage extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '4.8',
+                        destination.rating.toString(),
                         style: whiteTextStyle.copyWith(
                           fontWeight: medium,
                         ),
@@ -131,14 +136,12 @@ class DetailPage extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 color: kWhiteColor,
-                borderRadius: BorderRadius.circular(
-                  18,
-                ),
+                borderRadius: BorderRadius.circular(18),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // NOTE ABOUT
+                  // NOTE: ABOUT
                   Text(
                     'About',
                     style: blackTextStyle.copyWith(
@@ -150,11 +153,12 @@ class DetailPage extends StatelessWidget {
                     height: 6,
                   ),
                   Text(
-                    'Berada di jalur jalan provinsi yang menghubungkan DenpasarSingaraja serta letaknya yang dekat dengan Kebun Raya Eka Karya menjadikan tempat Bali.',
+                    'Berada di jalur jalan provinsi yang menghubungkan Denpasar Singaraja serta letaknya yang dekat dengan Kebun Raya Eka Karya menjadikan tempat Bali.',
                     style: blackTextStyle.copyWith(
                       height: 2,
                     ),
                   ),
+
                   // NOTE: PHOTOS
                   SizedBox(
                     height: 20,
@@ -199,8 +203,12 @@ class DetailPage extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      InterestItem(text: 'Kids Park'),
-                      InterestItem(text: 'Honor Bridge'),
+                      InterestItem(
+                        text: 'Kids Park',
+                      ),
+                      InterestItem(
+                        text: 'Honor Bridge',
+                      ),
                     ],
                   ),
                   SizedBox(
@@ -208,8 +216,12 @@ class DetailPage extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      InterestItem(text: 'City Museum'),
-                      InterestItem(text: 'Central Mall'),
+                      InterestItem(
+                        text: 'City Museum',
+                      ),
+                      InterestItem(
+                        text: 'Central Mall',
+                      ),
                     ],
                   ),
                 ],
@@ -222,12 +234,17 @@ class DetailPage extends StatelessWidget {
               margin: EdgeInsets.symmetric(vertical: 30),
               child: Row(
                 children: [
+                  // NOTE: PRICE
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'IDR 2.500.000',
+                          NumberFormat.currency(
+                            locale: 'id',
+                            symbol: 'IDR ',
+                            decimalDigits: 0,
+                          ).format(destination.price),
                           style: blackTextStyle.copyWith(
                             fontSize: 18,
                             fontWeight: medium,
@@ -253,7 +270,7 @@ class DetailPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ChooseSeatPage(),
+                          builder: (context) => ChooseSeatPage(destination),
                         ),
                       );
                     },
